@@ -10,7 +10,7 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
             </View>
             <View style={styles.container}>
                 <Text style={{ fontSize: 20, marginBottom: 20 }}>How much blood?</Text>
-                <ButtonGrid layout="grid" buttons={[
+                <ButtonGrid layout="list" buttons={[
                     {
                         props: {
                             text: "1",

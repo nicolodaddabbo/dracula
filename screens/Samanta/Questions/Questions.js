@@ -16,6 +16,10 @@ const questions = [
 export default function Questions({ navigation }) {
     const [questionNumber, setQuestionNumber] = useState(0);
 
+    if (questionNumber >= questions.length) {
+        navigation.navigate("Home");
+    }
+
     return (
         <View>
             <View style={styles.headerContainer}>
@@ -23,7 +27,7 @@ export default function Questions({ navigation }) {
             </View>
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text>test</Text>
+                    <Text>{questions[questionNumber]}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <ButtonGrid

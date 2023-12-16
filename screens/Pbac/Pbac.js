@@ -9,7 +9,7 @@ export default function Pbac({ navigation }) {
                 <Header text="PBAC TEST" button={false} />
             </View>
             <View style={styles.container}>
-                <ButtonGrid layout="grid" buttons={[
+                <ButtonGrid layout="list" buttons={[
                     {
                         props: {
                             text: "TAKE TEST",
