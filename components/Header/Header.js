@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 import { Icon } from "react-native-vector-icons/AntDesign";
+import style from "./header.module.css";
 
 export default function Header({ text, button }){
     const goToHomePage = () => {
