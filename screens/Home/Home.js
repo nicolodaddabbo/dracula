@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import AppButton from '../../components/AppButton/AppButton';
 import Header from '../../components/Header/Header';
 import ButtonGrid from '../../components/ButtonGrid/ButtonGrid';
 
@@ -24,7 +23,7 @@ export default function Home({ navigation }) {
                     {
                         props: {
                             text: "PBAC TEST",
-                            onPress: () => navigation.navigate("Pbac"),
+                            onPress: () => navigation.navigate("PbacInfo"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",

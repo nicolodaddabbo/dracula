@@ -13,7 +13,7 @@ export default function Samanta({ navigation }) {
                     {
                         props: {
                             text: "TAKE TEST",
-                            onPress: () => navigation.navigate("SamantaTest"),
+                            onPress: () => navigation.navigate("Questions"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -33,7 +33,7 @@ export default function Samanta({ navigation }) {
                     {
                         props: {
                             text: "PREVIOUS RESULT",
-                            onPress: () => navigation.navigate("SamantaResult"),
+                            onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",

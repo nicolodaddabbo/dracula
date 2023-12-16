@@ -1,8 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
-import AppButton from '../../components/AppButton/AppButton';
-import ButtonGrid from '../../components/ButtonGrid/ButtonGrid';
+import ButtonGrid from '../../../components/ButtonGrid/ButtonGrid';
 
-export default function Info({ navigation }) {
+export default function SamantaInfo({ navigation }) {
     return(
         <View style={styles.container}>
             <Text style={styles.text}>
@@ -12,8 +11,8 @@ export default function Info({ navigation }) {
             <ButtonGrid layout="grid" buttons={[
                     {
                         props: {
-                            text: "START TEST",
-                            onPress: () => navigation.navigate("SamantaTest"),
+                            text: "NEXT",
+                            onPress: () => navigation.navigate("Samanta"),
                             color: "red",
                             borderColor: "black",
                             backgroundColor: "white",

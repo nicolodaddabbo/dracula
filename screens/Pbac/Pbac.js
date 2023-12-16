@@ -6,7 +6,7 @@ export default function Pbac({ navigation }) {
     return (
         <View>
             <View style={styles.headerContainer}>
-                <Header text="PBAC TEST" button={false} />
+                <Header text="PBAC TEST" button navigation={navigation} />
             </View>
             <View style={styles.container}>
                 <ButtonGrid layout="list" buttons={[
@@ -23,7 +23,7 @@ export default function Pbac({ navigation }) {
                     {
                         props: {
                             text: "INFO",
-                            onPress: () => navigation.navigate("Pbac"),
+                            onPress: () => navigation.navigate("PbacInfo"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -33,7 +33,7 @@ export default function Pbac({ navigation }) {
                     {
                         props: {
                             text: "PREVIOUS RESULTS",
-                            onPress: () => navigation.navigate("Pbac"),
+                            onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",

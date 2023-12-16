@@ -17,13 +17,13 @@ export default function Questions({ navigation }) {
     const [questionNumber, setQuestionNumber] = useState(0);
 
     if (questionNumber >= questions.length) {
-        navigation.navigate("Home");
+        navigation.navigate("Result", { resultText: "You're ok" }); // TODO: change this to the actual result
     }
 
     return (
         <View>
             <View style={styles.headerContainer}>
-                <Header text={"QUESTION " + (questionNumber + 1)} button={true} navigation={navigation}/>
+                <Header text={"QUESTION " + (questionNumber + 1)} button={true} navigation={navigation} />
             </View>
             <View style={styles.container}>
                 <View style={styles.textContainer}>
