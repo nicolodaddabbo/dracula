@@ -6,7 +6,7 @@ export default function Pbac({ navigation }) {
     return (
         <View>
             <View style={styles.headerContainer}>
-                <Header text="PBAC TEST" button={false} />
+                <Header text="PBAC TEST" button={true} />
             </View>
             <View style={styles.container}>
                 <ButtonGrid layout="list" buttons={[
