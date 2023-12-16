@@ -12,9 +12,18 @@ import SamantaInfo from './screens/Samanta/SamantaInfo/SamantaInfo';
 import GeneralInfo from './screens/GeneralInfo/GeneralInfo';
 import PbacInfo from './screens/PbacInfo/PbacInfo';
 
+import * as SQLite from 'expo-sqlite'
+const db = SQLite.openDatabase('database')
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  db.transaction(tx => {
+    tx.executeSql(
+      'CREATE TABLE IF NOT EXISTS pbac (id INTEGER PRIMARY KEY AUTOINCREMENT, day INT, light INT, medium INT, heavy INT)'
+    )
+  })
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
