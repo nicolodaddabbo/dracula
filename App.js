@@ -5,9 +5,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       <AppButton
-        color="red"
         text="Click me!"
         onPress={() => console.log("Button pressed!")}
+        color="red"
+        borderColor="red"
+        backgroundColor="white"
+        dimension={"small"}
       />
     </View>
   );
