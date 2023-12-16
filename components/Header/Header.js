@@ -4,14 +4,14 @@ import style from "./header.module.css";
 
 export default function Header({ text, button, navigation }){
     const goToHomePage = () => {
-        navigation.navigate("Samanta");
+        navigation.navigate("Home");
     }
 
     return(
         <>
             <View style={style.header}>
                 <Text style={style.text}>{ text }</Text>
-                {button ? <FontAwesomeIcon name="home" size={30} onPress={goToHomePage}></FontAwesomeIcon> : <></>}
+                {button ? <FontAwesomeIcon name="home" size={30} color="white" onPress={goToHomePage}></FontAwesomeIcon> : <></>}
             </View>
         </>
     )
