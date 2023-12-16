@@ -1,38 +1,17 @@
-import { StyleSheet, View } from 'react-native';
-import AppButton from './components/AppButton/AppButton';
-import Header  from './components/Header/Header';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './screens/Home/Home';
+import Samanta from './screens/Samanta/Samanta';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View>
-      <View style={styles.headerContainer}>
-        <Header text="Header" button={false}/>
-      </View>
-    
-      <View style={styles.container}>
-        <AppButton
-          text="Click me!"
-          onPress={() => console.log("Button pressed!")}
-          color="red"
-          borderColor="red"
-          backgroundColor="white"
-          dimension={"small"}
-        />
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="Samanta" component={Samanta} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  headerContainer: {
-    flex: 1,
-    alignItems: 'flex-start'
-  }
-});
