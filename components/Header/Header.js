@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { Icon } from "react-native-vector-icons/AntDesign";
+import FontAwesomeIcon from "react-native-vector-icons/Entypo";
 import style from "./header.module.css";
 
 export default function Header({ text, button }){
@@ -11,7 +11,7 @@ export default function Header({ text, button }){
         <>
             <View style={style.header}>
                 <Text style={style.text}>{ text }</Text>
-                { button ? <Icon name="home" size={30} onPress={goToHomePage} style={style.icon}/> : <></> }
+                <FontAwesomeIcon name="home" size={30}></FontAwesomeIcon>
             </View>
         </>
     )
