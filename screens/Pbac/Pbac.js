@@ -7,11 +7,6 @@ import { useIsFocused } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('database');
 
-const RESULT_TEXTS = [
-    "You're ok",
-    "You're NOT ok",
-];
-
 const computeResult = (data) => {
     return new Promise((resolve, reject) => {
         let result = 0;
@@ -30,6 +25,77 @@ const computeResult = (data) => {
                         result += element.light + 5 * element.medium + 10 * element.heavy;
                     });
                     resolve(result);
+                }
+            );
+        });
+    });
+};
+
+const updateResults = (result) => {
+    return new Promise((resolve, reject) => {
+        db.transaction(
+            (tx) => {
+                tx.executeSql("insert into pbac_results (result) values (?)", [result]);
+                tx.executeSql("delete from pbac");
+                tx.executeSql("select * from pbac", [], (_, { rows }) => {
+                    console.log(JSON.stringify(rows));
+                    resolve("Transaction completed");
+                });
+            },
+            () => {
+                console.log("error");
+                reject("Transaction failed");
+            },
+            () => {
+                console.log("deleted");
+            }
+        );
+    });
+};
+
+const removeResults = () => {
+    return new Promise((resolve, reject) => {
+        db.transaction(
+            (tx) => {
+                tx.executeSql("delete from pbac_results");
+                tx.executeSql("select * from pbac_results", [], (_, { rows }) => {
+                    console.log(JSON.stringify(rows));
+                    resolve("Transaction completed");
+                });
+            },
+            () => {
+                console.log("error");
+                reject("Transaction failed");
+            },
+            () => {
+                console.log("deleted");
+            }
+        );
+    });
+};
+
+
+const checkIfTestIsOver = () => {
+    return new Promise((resolve, reject) => {
+        let result = 0;
+        console.log("weo");
+
+        db.transaction((tx) => {
+            tx.executeSql(
+                `select * from pbac_results;`,
+                () => {
+                    console.log("error Pbac checkIfTestIsOver");
+                    reject("Error executing SQL");
+                },
+                (_, { rows: { _array } }) => {
+                    console.log("checkIfTestIsOver");
+                    console.log(_array);
+                    let count = 0;
+                    _array.forEach((element) => {
+                        result += element.result;
+                        count++;
+                    });
+                    resolve([result, count]);
                 }
             );
         });
@@ -129,19 +195,18 @@ export default function Pbac({ navigation }) {
                         onPress: () => {
                             computeResult(data).then((result) => {
                                 console.log("result: " + result);
-    
-                                db.transaction(
-                                    (tx) => {
-                                        tx.executeSql("insert into pbac_results (result) values (?)", [result]);
-                                        tx.executeSql("delete from pbac");
-                                        tx.executeSql("select * from pbac", [], (_, { rows }) =>
-                                            console.log(JSON.stringify(rows))
-                                        );
-                                    },
-                                    () => console.log("error"),
-                                    () => console.log("deleted")
-                                );
-                                navigation.navigate("Result", { resultText: RESULT_TEXTS[result <= 100 ? 0 : 1] + " (Score = " + result + ")" });
+                                updateResults(result).then((a) => {
+                                    checkIfTestIsOver().then((results) => {
+                                        if (results[1] < 3) {
+                                            navigation.navigate("Result", { resultText: "Partial result = " + results[0] + " (" + results[1] + "/3 cycles)" });
+                                        } else {
+                                            removeResults().then(() => {
+                                                navigation.navigate("Result", { resultText: results[0] <= 100 ? "OK" : "BAD"});
+                                            })
+                                        }
+                                    })
+                                })
+                                
                             })
                         },
                         color: "black",
