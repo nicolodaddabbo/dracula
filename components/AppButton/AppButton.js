@@ -5,7 +5,7 @@ import styled from "styled-components";
 const DIMENSIONS = {
     small: "5% 5%",
     medium: "10% 10%",
-    big: "50% 50%"
+    big: "20% 20%"
 }
 
 const CustomPressable = styled.Pressable`
