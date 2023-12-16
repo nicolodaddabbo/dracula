@@ -1,21 +1,21 @@
-import { StyleSheet, View } from 'react-native';
-import AppButton from '../../components/AppButton/AppButton';
-import Header from '../../components/Header/Header';
-import ButtonGrid from '../../components/ButtonGrid/ButtonGrid';
+import { View, Text, StyleSheet } from 'react-native';
+import Header from '../../../components/Header/Header';
+import ButtonGrid from '../../../components/ButtonGrid/ButtonGrid';
 
-export default function Home({ navigation }) {
+export default function WasItSimilar({ navigation }) {
     return (
         <View>
             <View style={styles.headerContainer}>
-                <Header text="Dracula" button={false} />
+                <Header text={"PBAC TEST"} button={false} />
             </View>
             <View style={styles.container}>
+                <Text style={{ fontSize: 20, marginBottom: 20 }}>Was your last 2 cycles similar?</Text>
                 <ButtonGrid layout="grid" buttons={[
                     {
                         props: {
-                            text: "SAMANTA TEST",
-                            onPress: () => navigation.navigate("Samanta"),
-                            color: "black",
+                            text: "YES",
+                            onPress: () => navigation.navigate("Pbac"),
+                            color: "red",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "big"
@@ -23,9 +23,9 @@ export default function Home({ navigation }) {
                     },
                     {
                         props: {
-                            text: "PBAC TEST",
+                            text: "NO",
                             onPress: () => navigation.navigate("Pbac"),
-                            color: "black",
+                            color: "red",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "big"
@@ -35,7 +35,7 @@ export default function Home({ navigation }) {
             </View>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     headerContainer: {

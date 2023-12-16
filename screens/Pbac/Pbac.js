@@ -1,41 +1,50 @@
-import { StyleSheet, View } from 'react-native';
-import AppButton from '../../components/AppButton/AppButton';
+import { View, Text, StyleSheet } from 'react-native';
 import Header from '../../components/Header/Header';
 import ButtonGrid from '../../components/ButtonGrid/ButtonGrid';
 
-export default function Home({ navigation }) {
+export default function Pbac({ navigation }) {
     return (
         <View>
             <View style={styles.headerContainer}>
-                <Header text="Dracula" button={false} />
+                <Header text="PBAC TEST" button={false} />
             </View>
             <View style={styles.container}>
                 <ButtonGrid layout="grid" buttons={[
                     {
                         props: {
-                            text: "SAMANTA TEST",
-                            onPress: () => navigation.navigate("Samanta"),
+                            text: "TAKE TEST",
+                            onPress: () => navigation.navigate("FirstTimeChoice"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
-                            dimension: "big"
+                            dimension: "small"
                         }
                     },
                     {
                         props: {
-                            text: "PBAC TEST",
+                            text: "INFO",
                             onPress: () => navigation.navigate("Pbac"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
-                            dimension: "big"
+                            dimension: "small"
+                        }
+                    },
+                    {
+                        props: {
+                            text: "PREVIOUS RESULTS",
+                            onPress: () => navigation.navigate("Pbac"),
+                            color: "black",
+                            borderColor: "red",
+                            backgroundColor: "white",
+                            dimension: "small"
                         }
                     }
                 ]} />
             </View>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     headerContainer: {

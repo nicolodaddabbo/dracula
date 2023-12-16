@@ -2,6 +2,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home/Home';
 import Samanta from './screens/Samanta/Samanta';
+import Pbac from './screens/Pbac/Pbac';
+import FirstTimeChoice from './screens/Pbac/FirstTime/FirstTimeChoice';
+import Day from './screens/Pbac/Day/Day';
+import WasItSimilar from './screens/Pbac/WasItSimilar/WasItSimilar';
+import Result from './screens/Result/Result';
+import Question from './screens/Samanta/Question/Question';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +17,11 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="Samanta" component={Samanta} options={{ headerShown: false }} />
+        <Stack.Screen name="Pbac" component={Pbac} options={{ headerShown: false }} />
+        <Stack.Screen name="FirstTimeChoice" component={FirstTimeChoice} options={{ headerShown: false }} />
+        <Stack.Screen name="Day" component={Day} options={{ headerShown: false }} />
+        <Stack.Screen name="WasItSimilar" component={WasItSimilar} options={{ headerShown: false }} />
+        <Stack.Screen name="Result" component={Result} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
