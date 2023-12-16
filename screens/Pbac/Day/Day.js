@@ -15,7 +15,7 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
                         props: {
                             text: "1",
                             onPress: () => navigation.navigate("Result", { resultText: "Lorem ipsum" }),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "medium"
@@ -25,7 +25,7 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
                         props: {
                             text: "2",
                             onPress: () => navigation.navigate("Pbac"),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "medium"
@@ -35,7 +35,7 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
                         props: {
                             text: "3",
                             onPress: () => navigation.navigate("Pbac"),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "medium"

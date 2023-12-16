@@ -16,7 +16,7 @@ export default function Result({ navigation, route: { params: { resultText } } }
                     <AppButton
                         text="DONE"
                         onPress={() => navigation.navigate("Home")}
-                        color="red"
+                        color="black"
                         borderColor="red"
                         backgroundColor="white"
                         dimension="small"

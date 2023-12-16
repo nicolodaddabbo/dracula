@@ -7,7 +7,7 @@ import FirstTimeChoice from './screens/Pbac/FirstTime/FirstTimeChoice';
 import Day from './screens/Pbac/Day/Day';
 import WasItSimilar from './screens/Pbac/WasItSimilar/WasItSimilar';
 import Result from './screens/Result/Result';
-import Question from './screens/Samanta/Question/Question';
+import Questions from './screens/Samanta/Questions/Questions';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +22,7 @@ export default function App() {
         <Stack.Screen name="Day" component={Day} options={{ headerShown: false }} />
         <Stack.Screen name="WasItSimilar" component={WasItSimilar} options={{ headerShown: false }} />
         <Stack.Screen name="Result" component={Result} options={{ headerShown: false }} />
+        <Stack.Screen name="Questions" component={Questions} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

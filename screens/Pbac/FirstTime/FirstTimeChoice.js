@@ -15,7 +15,7 @@ export default function FistTimeChoice({ navigation }) {
                         props: {
                             text: "TOWEL",
                             onPress: () => navigation.navigate("Day", { dayNumber: 1}),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "big"
@@ -25,7 +25,7 @@ export default function FistTimeChoice({ navigation }) {
                         props: {
                             text: "TAMPON",
                             onPress: () => navigation.navigate("Day", { dayNumber: 1}),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "big"

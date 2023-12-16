@@ -15,7 +15,7 @@ export default function WasItSimilar({ navigation }) {
                         props: {
                             text: "YES",
                             onPress: () => navigation.navigate("Pbac"),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "big"
@@ -25,7 +25,7 @@ export default function WasItSimilar({ navigation }) {
                         props: {
                             text: "NO",
                             onPress: () => navigation.navigate("Pbac"),
-                            color: "red",
+                            color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
                             dimension: "big"
