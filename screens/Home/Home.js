@@ -10,7 +10,7 @@ export default function Home({ navigation }) {
                 <Header text="Dracula" button={false} />
             </View>
             <View style={styles.container}>
-                <ButtonGrid layout="grid" buttons={[
+                <ButtonGrid layout="list" buttons={[
                     {
                         props: {
                             text: "SAMANTA TEST",

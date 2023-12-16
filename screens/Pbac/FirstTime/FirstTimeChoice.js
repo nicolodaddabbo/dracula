@@ -10,7 +10,7 @@ export default function FistTimeChoice({ navigation }) {
             </View>
             <View style={styles.container}>
                 <Text style={{ fontSize: 20, marginBottom: 20 }}>What do you use?</Text>
-                <ButtonGrid layout="grid" buttons={[
+                <ButtonGrid layout="list" buttons={[
                     {
                         props: {
                             text: "TOWEL",
