@@ -1,6 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Header from '../../components/Header/Header';
 import ButtonGrid from '../../components/ButtonGrid/ButtonGrid';
+import * as SQLite from "expo-sqlite";
+import { useEffect, useState } from 'react';
+
+const db = SQLite.openDatabase('database');
 
 export default function Samanta({ navigation }) {
     return (
@@ -13,7 +17,10 @@ export default function Samanta({ navigation }) {
                     {
                         props: {
                             text: "TAKE TEST",
-                            onPress: () => navigation.navigate("Questions"),
+                            onPress: () => {
+                                initDb()
+                                navigation.navigate("SamantaTest")
+                            },
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -33,7 +40,7 @@ export default function Samanta({ navigation }) {
                     {
                         props: {
                             text: "PREVIOUS RESULT",
-                            onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
+                            onPress: () => navigation.navigate("SamantaResult"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -44,6 +51,14 @@ export default function Samanta({ navigation }) {
             </View>
         </>
     );
+}
+
+function initDb(){
+    useEffect(() => {
+        db.transaction(tx => {
+            tx.executeSql('DELETE FROM samanta', null);
+        })
+    })
 }
 
 const styles = StyleSheet.create({
