@@ -3,17 +3,22 @@ import AppButton from '../../components/AppButton/AppButton';
 
 export default function Samanta({ navigation }) {
     return (
-        <View style={styles.container}>
-            <Text>Samanta</Text>
-            <AppButton
-                text="Click me!"
-                onPress={() => navigation.navigate("Home")}
-                color="red"
-                borderColor="red"
-                backgroundColor="white"
-                dimension={"small"}
-            />
-        </View>
+        <>
+            <View style={styles.headerContainer}>
+                <Header text="Dracula" button={false} />
+            </View>
+            <View style={styles.container}>
+                <Text>Samanta</Text>
+                <AppButton
+                    text="Click me!"
+                    onPress={() => navigation.navigate("Home")}
+                    color="red"
+                    borderColor="red"
+                    backgroundColor="white"
+                    dimension={"small"}
+                />
+            </View>
+        </>
     );
 }
 
