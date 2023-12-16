@@ -20,8 +20,11 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   db.transaction(tx => {
     tx.executeSql(
-      'CREATE TABLE IF NOT EXISTS pbac (id INTEGER PRIMARY KEY AUTOINCREMENT, day INT, light INT, medium INT, heavy INT)'
-    )
+      'CREATE TABLE IF NOT EXISTS pbac (id INTEGER PRIMARY KEY AUTOINCREMENT, day INT UNIQUE, startDate DATE, light INT, medium INT, heavy INT)'
+    );
+    tx.executeSql(
+      'CREATE TABLE IF NOT EXISTS pbac_results (id INTEGER PRIMARY KEY AUTOINCREMENT, result INT)'
+    );
   })
 
   return (

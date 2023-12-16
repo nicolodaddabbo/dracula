@@ -1,8 +1,47 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Header from '../../../components/Header/Header';
 import ButtonGrid from '../../../components/ButtonGrid/ButtonGrid';
+import { useState, useEffect } from 'react';
 
-export default function Day({ navigation, route: { params: { dayNumber } } }) {
+import * as SQLite from 'expo-sqlite';
+const db = SQLite.openDatabase('database');
+
+const onPress = (navigation, dayNumber, protection, level) => {
+    db.transaction(
+        (tx) => {
+            tx.executeSql("update pbac set " + level + " = " + level + " + 1 where day = ?", [dayNumber]);
+            tx.executeSql("select * from pbac", [], (_, { rows }) =>
+                console.log(JSON.stringify(rows))
+            );
+        },
+        null,
+        () => navigation.navigate("Pbac")
+    );
+}
+
+export default function Day({ navigation, route: { params: { dayNumber, protection } } }) {
+    const [data, setData] = useState(null); 
+    const [nextScreen, setNextScreen] = useState("Pbac");
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `select * from pbac where day=?;`,
+                [dayNumber],
+                (_, { rows: { _array } }) => setData(_array)
+            );
+        });
+    }, []);
+    
+    useEffect(() => {
+        if (!loading) {
+            console.log("[Day " + dayNumber + "] data: ");
+            console.log(data);
+        }
+    }, [data]);
+
+
     return (
         <View>
             <View style={styles.headerContainer}>
@@ -13,8 +52,8 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
                 <ButtonGrid layout="list" buttons={[
                     {
                         props: {
-                            text: "1",
-                            onPress: () => navigation.navigate("Result", { resultText: "Lorem ipsum" }),
+                            text: "light " + protection,
+                            onPress: () => onPress(navigation, dayNumber, protection, "light"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -23,8 +62,8 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
                     },
                     {
                         props: {
-                            text: "2",
-                            onPress: () => navigation.navigate("Pbac"),
+                            text: "medium " + protection,
+                            onPress: () => onPress(navigation, dayNumber, protection, "medium"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -33,8 +72,8 @@ export default function Day({ navigation, route: { params: { dayNumber } } }) {
                     },
                     {
                         props: {
-                            text: "3",
-                            onPress: () => navigation.navigate("Pbac"),
+                            text: "heavy " + protection,
+                            onPress: () => onPress(navigation, dayNumber, protection, "heavy"),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
