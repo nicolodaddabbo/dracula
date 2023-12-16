@@ -24,6 +24,12 @@ export default function App() {
     )
   })
 
+  db.transaction(tx => {
+    tx.executeSql(
+      'CREATE TABLE IF NOT EXISTS samanta (id INTEGER PRIMARY KEY AUTOINCREMENT, question INT, answer TEXT)'
+    )
+  })
+
   return (
     <NavigationContainer>
       <Stack.Navigator>

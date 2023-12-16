@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Header from '../../../components/Header/Header';
 import AppButton from '../../../components/AppButton/AppButton';
-import React, { useState } from 'react';
 import ButtonGrid from '../../../components/ButtonGrid/ButtonGrid';
+import * as SQLite from "expo-sqlite";
+import { useEffect, useState } from 'react';
 
 const questions = [
     "Does your period usually last for more than 7 days?",
@@ -13,17 +14,39 @@ const questions = [
     "In general, during heavy bleeding, do you avoid certain activities, like trips or leisure plans, because you need to change protection frequently?"
 ]
 
+const db = SQLite.openDatabase('database');
+
 export default function Questions({ navigation }) {
     const [questionNumber, setQuestionNumber] = useState(0);
 
-    if (questionNumber >= questions.length) {
-        navigation.navigate("Result", { resultText: "You're ok" }); // TODO: change this to the actual result
-    }
+    const [data, setData] = useState([]);
+    useEffect(() => 
+    {
+        if (questionNumber >= questions.length) {
+        db.transaction((tx) => {
+              tx.executeSql(
+                `select * from samanta;`,
+                null,
+                (_, { rows: { _array } }) => setData(_array)
+              );
+            });
+        
+        const result = 0;
+        for(let i = 0; i < 6; ++i)
+          if(data[i] == "Yes")
+            ++result;
+
+        const resultText = getTextResult(result);
+        console.log(data)
+        
+        navigation.navigate("Result", { resultText }); // TODO: change this to the actual result
+        }
+    })
 
     return (
         <View>
             <View style={styles.headerContainer}>
-                <Header text={"QUESTION " + (questionNumber + 1)} button={true} navigation={navigation} />
+                <Header text={"QUESTION " + (questionNumber + 1)} button={false} navigation={navigation} />
             </View>
             <View style={styles.container}>
                 <View style={styles.textContainer}>
@@ -36,7 +59,12 @@ export default function Questions({ navigation }) {
                             {
                                 props: {
                                     text: "Yes",
-                                    onPress: () => setQuestionNumber(questionNumber + 1),
+                                    onPress: () => {
+                                        db.transaction(tx => {
+                                            tx.executeSql('INSERT INTO samanta (question, answer) values (?, ?);', [questionNumber, "Yes"]);
+                                        })
+                                        setQuestionNumber(questionNumber + 1)
+                                    },
                                     color: "black",
                                     borderColor: "red",
                                     backgroundColor: "white",
@@ -46,7 +74,12 @@ export default function Questions({ navigation }) {
                             {
                                 props: {
                                     text: "No",
-                                    onPress: () => setQuestionNumber(questionNumber + 1),
+                                    onPress: () => {
+                                            db.transaction(tx => {
+                                                tx.executeSql('INSERT INTO samanta (question, answer) values (?, ?);', [questionNumber, "No"]);
+                                            })
+                                        setQuestionNumber(questionNumber + 1)
+                                    },
                                     color: "black",
                                     borderColor: "red",
                                     backgroundColor: "white",
@@ -59,6 +92,10 @@ export default function Questions({ navigation }) {
             </View>
         </View>
     );
+}
+
+function getTextResult(result){
+    return result > 3 ? "You need to see a doctor" : "You are okay";
 }
 
 const styles = StyleSheet.create({

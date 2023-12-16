@@ -18,8 +18,10 @@ export default function Samanta({ navigation }) {
                         props: {
                             text: "TAKE TEST",
                             onPress: () => {
-                                initDb()
-                                navigation.navigate("SamantaTest")
+                                    db.transaction(tx => {
+                                    tx.executeSql('DELETE FROM samanta', null);
+                                    })
+                                navigation.navigate("Questions")
                             },
                             color: "black",
                             borderColor: "red",
@@ -51,14 +53,6 @@ export default function Samanta({ navigation }) {
             </View>
         </>
     );
-}
-
-function initDb(){
-    useEffect(() => {
-        db.transaction(tx => {
-            tx.executeSql('DELETE FROM samanta', null);
-        })
-    })
 }
 
 const styles = StyleSheet.create({
