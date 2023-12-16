@@ -9,7 +9,7 @@ export default function Samanta({ navigation }) {
                 <Header text="SAMANTA TEST" button={true} navigation={navigation}/>
             </View>
             <View style={styles.container}>
-            <ButtonGrid layout="grid" buttons={[
+            <ButtonGrid layout="list" buttons={[
                     {
                         props: {
                             text: "TAKE TEST",

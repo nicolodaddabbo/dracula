@@ -8,6 +8,7 @@ import Day from './screens/Pbac/Day/Day';
 import WasItSimilar from './screens/Pbac/WasItSimilar/WasItSimilar';
 import Result from './screens/Result/Result';
 import Questions from './screens/Samanta/Questions/Questions';
+import Info from './screens/Info/Info';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="Samanta" component={Samanta} options={{ headerShown: false }} />
+        <Stack.Screen name="SamantaInfo" component={Info} options={{ headerShown: false }} />
         <Stack.Screen name="Pbac" component={Pbac} options={{ headerShown: false }} />
         <Stack.Screen name="FirstTimeChoice" component={FirstTimeChoice} options={{ headerShown: false }} />
         <Stack.Screen name="Day" component={Day} options={{ headerShown: false }} />
