@@ -25,6 +25,9 @@ export default function App() {
     tx.executeSql(
       'CREATE TABLE IF NOT EXISTS pbac_results (id INTEGER PRIMARY KEY AUTOINCREMENT, result INT)'
     );
+    tx.executeSql(
+      'CREATE TABLE IF NOT EXISTS samanta (id INTEGER PRIMARY KEY AUTOINCREMENT, question INT, answer TEXT)'
+    );
   })
 
   return (

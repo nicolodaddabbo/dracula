@@ -2,6 +2,30 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from '../../components/Header/Header';
 import ButtonGrid from '../../components/ButtonGrid/ButtonGrid';
 
+import * as SQLite from 'expo-sqlite';
+const db = SQLite.openDatabase('database');
+
+const clearData = () => {
+    return new Promise((resolve, reject) => {
+        db.transaction(
+            (tx) => {
+                tx.executeSql("delete from samanta");
+                tx.executeSql("select * from samanta", [], (_, { rows }) => {
+                    console.log(JSON.stringify(rows));
+                    resolve("Transaction completed");
+                });
+            },
+            () => {
+                console.log("error");
+                reject("Transaction failed");
+            },
+            () => {
+                console.log("deleted");
+            }
+        );
+    });
+};
+
 export default function Samanta({ navigation }) {
     return (
         <>
@@ -13,7 +37,11 @@ export default function Samanta({ navigation }) {
                     {
                         props: {
                             text: "TAKE TEST",
-                            onPress: () => navigation.navigate("Questions"),
+                            onPress: () => {
+                                clearData().then(() => {
+                                    navigation.navigate("Questions");
+                                });
+                            },
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
