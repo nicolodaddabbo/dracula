@@ -25,7 +25,7 @@ export default function PbacInfo({ navigation }) {
     )
 }
 
-const text = "Heavy menstrual bleeding (HMB) is the excessive loss of menstrual blood that interferes with the quality of life. It is an under-diagnosed and under-treated disorder. This issue, aside from preventing you from living your life to the fullest, can also pose a serious health threat. It can lead to anemia and may serve as a symptom of an underlying health problem or disease, such as cancer.";
+const text = "Pictorial Blood Loss Assessment Charts (PBACs) stand as the predominant method for evaluating menstrual blood loss. Our innovative app simplifies this process for you. Each time you visit the bathroom, effortlessly assess your bleeding by opening the app. Choose the appropriate flow level—be it low, medium, or high. For added convenience, you can even allow the app to gauge the amount of bleeding by capturing a photo of your protection.";
 
 const styles = StyleSheet.create({
     container: {

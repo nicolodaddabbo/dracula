@@ -33,9 +33,9 @@ export default function FistTimeChoice({ navigation }) {
         const base64Image = capturedImage;
         axios({
             method: 'POST',
-            url: 'https://example_api/endpoint',
+            url: 'http://192.168.248.151:8000/todo',
             params: {
-                api_key: 'YOUR_API_KEY'
+                img: base64Image
             },
             data: base64Image,
             headers: {
