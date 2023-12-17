@@ -23,7 +23,7 @@ export default function FistTimeChoice({ navigation }) {
         });
 
         if (!result.canceled) {
-            setCapturedImage(result.base64);
+            setCapturedImage(result);
         } else {
             alert('You did not select any image.');
         }
@@ -31,8 +31,9 @@ export default function FistTimeChoice({ navigation }) {
 
     const callApi = async () => {
         const base64Image = capturedImage;
+        console.log(base64Image)
         axios({
-            method: 'POST',
+            method: 'GET',
             url: 'http://192.168.248.151:8000/todo',
             params: {
                 img: base64Image
@@ -44,7 +45,8 @@ export default function FistTimeChoice({ navigation }) {
         }).then(function (response) {
             console.log("response")
             console.log(response.data);
-            setResult(response.data);
+            let result = response.scanResult == "LOW" ? "light" : response.scanResult == "MEDIUM" ? "medium" : "heavy";
+            setResult(result);
         }).catch(function (error) {
             console.log(error.message);
             return null;
