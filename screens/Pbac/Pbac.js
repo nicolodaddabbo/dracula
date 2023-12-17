@@ -172,16 +172,17 @@ export default function Pbac({ navigation }) {
                 dimension: "small"
             }
         },
-        {
-            props: {
-                text: "PREVIOUS RESULTS",
-                onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
-                color: "black",
-                borderColor: "red",
-                backgroundColor: "white",
-                dimension: "small"
-            }
-        }];
+        // {
+        //     props: {
+        //         text: "PREVIOUS RESULTS",
+        //         onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
+        //         color: "black",
+        //         borderColor: "red",
+        //         backgroundColor: "white",
+        //         dimension: "small"
+        //     }
+        // }
+    ];
 
     const [buttons, setButtons] = useState(defaultButtons);
 
@@ -197,16 +198,20 @@ export default function Pbac({ navigation }) {
                                 console.log("result: " + result);
                                 updateResults(result).then((a) => {
                                     checkIfTestIsOver().then((results) => {
-                                        if (results[1] < 3) {
-                                            navigation.navigate("Result", { resultText: "Partial result = " + results[0] + " (" + results[1] + "/3 cycles)" });
+                                        console.log("results: " + results[1]);
+                                        if (results[1] === 1) {
+                                            console.log("was it similar");
+                                            navigation.navigate("WasItSimilar");
+                                        } else if (results[1] > 1 && results[1] < 3) {
+                                            navigation.navigate("Result", { resultText: "You need to finish testing for 3 cycles. Partial result = " + results[0] + " (" + results[1] + "/3 cycles)" });
                                         } else {
                                             removeResults().then(() => {
-                                                navigation.navigate("Result", { resultText: results[0] <= 100 ? "OK" : "BAD"});
+                                                navigation.navigate("Result", { resultText: results[0] <= 100 ? "You're ok. (Score=" + results[0] + ")" : "You should see a doctor. (Score=" + results[0] + ")" });
                                             })
                                         }
                                     })
                                 })
-                                
+
                             })
                         },
                         color: "black",

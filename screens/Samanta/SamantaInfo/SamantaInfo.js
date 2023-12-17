@@ -25,7 +25,7 @@ export default function SamantaInfo({ navigation }) {
     )
 }
 
-const text = "Samanta Info";
+const text = "This questionaire developed with the objective of identifying women of reproductive age that are experiencing Heavy Menstrual Bleeding in Spain. It was developed by assessing and identifying 6 items deemed the most crucial factors in discriminating between women with and without HMB. The questionnaire demonstrated a sensitivity of 86.7%, a specificity of 89.5%, and an 87.9% accuracy in classification.";
 
 const styles = StyleSheet.create({
     container: {
@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#FFF",
+        fontSize: 20,
     }
 });

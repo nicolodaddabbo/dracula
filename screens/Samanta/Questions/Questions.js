@@ -69,7 +69,7 @@ export default function Questions({ navigation }) {
             computeResult().then((result) => {
                 console.log("result");
                 console.log(result);
-                navigation.navigate("Result", { resultText: result > 3 ? "You're not ok" : "You're ok" }); // TODO: change this to the actual result
+                navigation.navigate("Result", { resultText: result > 3 ? "You should see a doctor." : "You're ok." }); // TODO: change this to the actual result
             });
         }
     }, [questionNumber]);
@@ -81,7 +81,7 @@ export default function Questions({ navigation }) {
             </View>
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text>{questions[questionNumber]}</Text>
+                    <Text style={{fontSize: 20}}>{questions[questionNumber]}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <ButtonGrid
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
     textContainer: {
         width: "100%",
         flex: 1,
-        alignItems: "left",
-        justifyContent: "top",
+        alignItems: "center",
+        justifyContent: "center",
     },
     buttonContainer: {
         width: "100%",

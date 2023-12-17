@@ -2,14 +2,54 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from '../../../components/Header/Header';
 import ButtonGrid from '../../../components/ButtonGrid/ButtonGrid';
 import { useState, useEffect } from 'react';
-
+import axios from 'axios';
 import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('database');
+
+import * as ImagePicker from 'expo-image-picker';
 
 export default function FistTimeChoice({ navigation }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [day, setDay] = useState(1);
+    const [capturedImage, setCapturedImage] = useState(null);
+    const [result, setResult] = useState(null);
+
+    const handleOpenImagePicker = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            base64: true,
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setCapturedImage(result.base64);
+        } else {
+            alert('You did not select any image.');
+        }
+    };
+
+    const callApi = async () => {
+        const base64Image = capturedImage;
+        axios({
+            method: 'POST',
+            url: 'https://example_api/endpoint',
+            params: {
+                api_key: 'YOUR_API_KEY'
+            },
+            data: base64Image,
+            headers: {
+                // define your headers
+            }
+        }).then(function (response) {
+            console.log("response")
+            console.log(response.data);
+            setResult(response.data);
+        }).catch(function (error) {
+            console.log(error.message);
+            return null;
+        });
+    };
 
     useEffect(() => {
         db.transaction((tx) => {
@@ -66,8 +106,34 @@ export default function FistTimeChoice({ navigation }) {
                 <ButtonGrid layout="list" buttons={[
                     {
                         props: {
+                            text: "TAKE A PICTURE",
+                            onPress: () => {
+                                handleOpenImagePicker().then(() => {
+                                    callApi().then((response) => {
+                                        db.transaction(
+                                            (tx) => {
+                                                tx.executeSql("update pbac set " + result + " = " + result + " + 1 where day = ?", [day]);
+                                                tx.executeSql("select * from pbac", [], (_, { rows }) =>
+                                                    console.log(JSON.stringify(rows))
+                                                );
+                                            },
+                                            null,
+                                            () => navigation.navigate("Pbac")
+                                        );
+                                    })
+                                })
+                                //navigation.navigate("Day", { dayNumber: day, protection: "towel" })
+                            },
+                            color: "black",
+                            borderColor: "red",
+                            backgroundColor: "white",
+                            dimension: "big"
+                        }
+                    },
+                    {
+                        props: {
                             text: "TOWEL",
-                            onPress: () => navigation.navigate("Day", { dayNumber: day, protection: "towel"}),
+                            onPress: () => navigation.navigate("Day", { dayNumber: day, protection: "towel" }),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",
@@ -77,7 +143,7 @@ export default function FistTimeChoice({ navigation }) {
                     {
                         props: {
                             text: "TAMPON",
-                            onPress: () => navigation.navigate("Day", { dayNumber: day, protection: "tampon"}),
+                            onPress: () => navigation.navigate("Day", { dayNumber: day, protection: "tampon" }),
                             color: "black",
                             borderColor: "red",
                             backgroundColor: "white",

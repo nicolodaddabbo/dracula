@@ -10,7 +10,7 @@ export default function Result({ navigation, route: { params: { resultText } } }
             </View>
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text>{resultText}</Text>
+                    <Text style={{fontSize: 20}}>{resultText}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <AppButton
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     textContainer: {
         width: "100%",
         flex: 1,
-        alignItems: "left",
-        justifyContent: "top",
+        alignItems: "center",
+        justifyContent: "center",
     },
     buttonContainer: {
         width: "100%",

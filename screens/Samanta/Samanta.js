@@ -58,16 +58,16 @@ export default function Samanta({ navigation }) {
                             dimension: "small"
                         }
                     },
-                    {
-                        props: {
-                            text: "PREVIOUS RESULT",
-                            onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
-                            color: "black",
-                            borderColor: "red",
-                            backgroundColor: "white",
-                            dimension: "small"
-                        }
-                    }
+                    // {
+                    //     props: {
+                    //         text: "PREVIOUS RESULT",
+                    //         onPress: () => navigation.navigate("Result", { resultText: "You're ok" }), // TODO: change this to the actual result
+                    //         color: "black",
+                    //         borderColor: "red",
+                    //         backgroundColor: "white",
+                    //         dimension: "small"
+                    //     }
+                    // }
                 ]} />
             </View>
         </>
